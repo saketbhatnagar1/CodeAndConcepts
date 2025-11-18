@@ -28,5 +28,3 @@ class CeaserCypher:
         return orignal_text
 encryptedText = CeaserCypher.encrypt("saketz",1)
 CeaserCypher.decrypt(encryptedText,1)
-
-
