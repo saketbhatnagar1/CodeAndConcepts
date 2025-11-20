@@ -13,6 +13,7 @@ def button_click():
     print("I GOT CLICKED")
     mylabel.config(text="I got clicked lol")
     # Change the button text
+    new_text = input.get()
     button.config(text="LOL")
 
 
@@ -26,7 +27,9 @@ button.pack()
 #ENTRY
 
 input = tkinter.Entry()
-
+input.pack()
+#LAYOUT MANAGERS FOR TKINTER:
+#PACK PLACE AND GRID 
 
 
 

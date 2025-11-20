@@ -1,4 +1,3 @@
-
 from tkinter import *
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -19,14 +18,16 @@ LONG_BREAK_MIN = 20
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Pomodoro")
-window.config(padx=100,pady=100)
+window.config(padx=100,pady=100,bg=YELLOW)
 
+title_label = Label(text="timer",fg = GREEN)
 
 canvas = Canvas(width=200,height = 224)
 tomatoPhoto = PhotoImage(file="tomato.png")
 canvas.create_image(100,112,image=tomatoPhoto)
 canvas.create_text(103,112,text="00:00")
 canvas.pack()
+
 
 
 

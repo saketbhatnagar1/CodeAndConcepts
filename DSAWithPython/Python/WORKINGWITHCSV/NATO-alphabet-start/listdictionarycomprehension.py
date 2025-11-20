@@ -71,4 +71,4 @@ for (key,value) in student_dict.items():
 #ITER ROWS:
 
 for (index,row) in student_dict.iterrows():
-    print(row)
+    print(row)#row.COLUMNNAME will give that row 

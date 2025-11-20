@@ -119,3 +119,4 @@ class LinkedList: #Class for linke dlist
             
     def doubly():
         pass
+    
