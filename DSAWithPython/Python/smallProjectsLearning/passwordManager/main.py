@@ -2,7 +2,11 @@
 import random
 import string
 import os
+import json
 import pyperclip
+from dotenv import load_dotenv
+load_dotenv()
+import os 
 
 numbers = [str(n) for n in range(10)]
 alphabets = [chr(letter) for letter in range(97,123)] + [chr(x) for x in range(97, 123)]
@@ -42,10 +46,18 @@ def validate(email,password,website):
     return True
 
 
-def save_password(file_path=r""):
+def save_password():
+    file_path = os.environ.get("password_path")
     website = website_entry.get()
     email = email_entry.get()
     password = password_entry.get()
+
+    new_data = {
+        website: {
+            "email": email,
+            "password": password,
+        }
+    }
 
     if not website or not email or not password:
         messagebox.showwarning(title="Oops", message="Please don't leave any fields empty!")
@@ -57,18 +69,28 @@ def save_password(file_path=r""):
     )
 
     if is_ok:
-        if validate(password=password, email=email, website=website):
-            folder = file_path
-            os.makedirs(folder, exist_ok=True)  # Ensure folder exists
+        folder = file_path
+        os.makedirs(folder, exist_ok=True)
 
-            # ✅ File path inside the folder
-            actual_file_path = os.path.join(folder, "data.txt")
+        actual_file_path = os.path.join(folder, "data.json")
 
-            # Open the file for appending
-            with open(actual_file_path, "a") as data_file:
-                data_file.write(f"{website} | {email} | {password}\n")
-                password_entry.delete(0, END)
-                website_entry.delete(0, END)
+        # --- Load old data ---
+        try:
+            with open(actual_file_path, "r") as data_file:
+                display_data = json.load(data_file)
+        except FileNotFoundError:
+            display_data = {}  # File doesn't exist yet
+        else:
+        # --- Update the data ---
+            display_data.update(new_data)
+
+        # --- Save updated data ---
+            with open(actual_file_path, "w") as data_file:
+                json.dump(display_data, data_file, indent=4)
+        finally:
+        # --- Clear input fields ---
+            password_entry.delete(0, END)
+            website_entry.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
