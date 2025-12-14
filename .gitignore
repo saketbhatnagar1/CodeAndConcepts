@@ -13,7 +13,7 @@ __pycache__/
 # OS files
 .DS_Store
 Thumbs.db
-
+templates
 # Snyk Security Extension - AI Rules (auto-generated)
 .github\instructions\snyk_rules.instructions.md
 
